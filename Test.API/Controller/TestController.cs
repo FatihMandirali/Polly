@@ -11,7 +11,6 @@ public class TestController:ControllerBase
     public async Task<IActionResult> GetTest()
     {
         Console.WriteLine("istek geldi");
-        await Task.Delay(10000);
         throw new Exception();
         return Ok(new { test = "test" });
     }

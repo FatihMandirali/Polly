@@ -18,12 +18,15 @@ public class App
              });
         
         var circuitBreakerPolicy = Policy.Handle<Exception>()
-            .AdvancedCircuitBreakerAsync(
-                durationOfBreak: TimeSpan.FromSeconds(10),  // the circuit breaks for 10 seconds
-                failureThreshold: 0.1,                      // if there is a 10% failure rate
-                samplingDuration: TimeSpan.FromSeconds(60), // in a 60 second window
-                minimumThroughput: 2                      // with a minimum of 100 requests
-            );
+             .CircuitBreakerAsync(3, TimeSpan.FromSeconds(50));
+        
+        // var circuitBreakerPolicy = Policy.Handle<Exception>()
+        //     .AdvancedCircuitBreakerAsync(
+        //         durationOfBreak: TimeSpan.FromSeconds(10),  // the circuit breaks for 10 seconds
+        //         failureThreshold: 0.1,                      // if there is a 10% failure rate
+        //         samplingDuration: TimeSpan.FromSeconds(60), // in a 60 second window
+        //         minimumThroughput: 2                      // with a minimum of 100 requests
+        //     );
 
         //var finallyPolicy = retryPolicy.WrapAsync(circuitBreakerPolicy);
         var wrapAsync = Policy.WrapAsync(retryPolicy,circuitBreakerPolicy);
