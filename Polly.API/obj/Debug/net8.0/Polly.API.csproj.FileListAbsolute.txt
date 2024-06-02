@@ -34,3 +34,5 @@
 /Users/fatihmandirali/Documents/ws/lessons/polly/Polly/Polly.API/obj/Debug/net8.0/Polly.API.genruntimeconfig.cache
 /Users/fatihmandirali/Documents/ws/lessons/polly/Polly/Polly.API/obj/Debug/net8.0/ref/Polly.API.dll
 /Users/fatihmandirali/Documents/ws/lessons/polly/Polly/Polly.API/obj/Debug/net8.0/Polly.API.sourcelink.json
+/Users/fatihmandirali/Documents/ws/lessons/polly/Polly/Polly.API/bin/Debug/net8.0/Microsoft.Extensions.Http.Polly.dll
+/Users/fatihmandirali/Documents/ws/lessons/polly/Polly/Polly.API/bin/Debug/net8.0/Polly.Extensions.Http.dll

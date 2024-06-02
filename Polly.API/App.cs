@@ -10,16 +10,16 @@ public class App
     }
     public async Task<object> GetResponse()
     {
-        var retryPolicy = Policy
-             .Handle<Exception>()
-             .RetryAsync(5, onRetry: (exception, retryCount) =>
-             {
-                 Console.WriteLine("Error : "+ exception.Message + "... RetryCount "+ retryCount);
-             });
-        
-        var circuitBreakerPolicy = Policy.Handle<Exception>()
-             .CircuitBreakerAsync(3, TimeSpan.FromSeconds(50));
-        
+        // var retryPolicy = Policy
+        //      .Handle<Exception>()
+        //      .RetryAsync(5, onRetry: (exception, retryCount) =>
+        //      {
+        //          Console.WriteLine("Error : "+ exception.Message + "... RetryCount "+ retryCount);
+        //      });
+        //
+        // var circuitBreakerPolicy = Policy.Handle<Exception>()
+        //      .CircuitBreakerAsync(3, TimeSpan.FromSeconds(50));
+        //
         // var circuitBreakerPolicy = Policy.Handle<Exception>()
         //     .AdvancedCircuitBreakerAsync(
         //         durationOfBreak: TimeSpan.FromSeconds(10),  // the circuit breaks for 10 seconds
@@ -29,9 +29,10 @@ public class App
         //     );
 
         //var finallyPolicy = retryPolicy.WrapAsync(circuitBreakerPolicy);
-        var wrapAsync = Policy.WrapAsync(retryPolicy,circuitBreakerPolicy);
+        //var wrapAsync = Policy.WrapAsync(retryPolicy,circuitBreakerPolicy);
         
-        var res = await wrapAsync.ExecuteAsync(async ()=>  await _httpClient.GetFromJsonAsync<object>("api/Test/GetTest"));
+        //var res = await wrapAsync.ExecuteAsync(async ()=>  await _httpClient.GetFromJsonAsync<object>("api/Test/GetTest"));
+        var res = await _httpClient.GetFromJsonAsync<object>("api/Test/GetTest");
 
         return res;
     }

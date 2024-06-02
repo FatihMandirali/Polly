@@ -1,4 +1,6 @@
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using Polly;
 using Polly.API;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +14,14 @@ builder.Services
     {
         x.BaseAddress = new Uri("http://localhost:5248/");
         x.DefaultRequestHeaders.Accept.Clear();
-        x.Timeout=TimeSpan.FromSeconds(2);
+        //x.Timeout = TimeSpan.FromSeconds(2);
         x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    });
+    })
+    .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(1)))
+    .AddTransientHttpErrorPolicy(policy=>policy.CircuitBreakerAsync(3,TimeSpan.FromSeconds(20)));
+    //https://abhisheksubbu.github.io/polly-retry-policies/
+
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
