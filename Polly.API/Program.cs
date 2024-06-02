@@ -16,10 +16,11 @@ builder.Services
         x.DefaultRequestHeaders.Accept.Clear();
         //x.Timeout = TimeSpan.FromSeconds(2);
         x.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    })
-    .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(1)))
-    .AddTransientHttpErrorPolicy(policy=>policy.CircuitBreakerAsync(3,TimeSpan.FromSeconds(20)));
+    });
+    //.AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(1)))
+    //.AddTransientHttpErrorPolicy(policy=>policy.CircuitBreakerAsync(3,TimeSpan.FromSeconds(20)));
     //https://abhisheksubbu.github.io/polly-retry-policies/
+    //https://www.youtube.com/watch?v=JljTcjt798c
 
 
 builder.Services.AddControllers();
